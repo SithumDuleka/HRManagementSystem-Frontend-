@@ -17,6 +17,9 @@ export class EmployeeComponent implements OnInit {
   searchId: number = 0;
   searchName: string = '';
   isUpdating: boolean = false;
+  modalMessage: string = '';
+
+  
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -54,13 +57,13 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // ✅ Edit employee - Load into form
+  // Edit employee 
   editEmployee(emp: Employee) {
     this.employee = { ...emp };
     this.isUpdating = true;
   }
 
-  // ✅ Delete employee
+  // Delete employee
   deleteEmployee(id: number | undefined) {
     if (id !== undefined) {
       if (confirm('Are you sure you want to delete this employee?')) {
@@ -72,7 +75,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // ✅ Search employee by ID
+  // Search employee by ID
   searchEmployeeById() {
     if (this.searchId > 0) {
       this.employeeService.getById(this.searchId).subscribe((emp) => {
@@ -84,19 +87,20 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // ✅ Search employees by Name
+  // Search employees by Name
   searchEmployeeByName() {
     if (this.searchName.trim() !== '') {
       this.employeeService.getByName(this.searchName).subscribe((data) => {
         this.employees = data;
       }, (error) => {
         alert('No employees found with Name: ' + this.searchName);
+        
         this.loadEmployees();
       });
     }
   }
 
-  // ✅ Reset form
+  // Reset form
   resetForm() {
     this.employee = { name: '', email: '', department: 'HR' };
     this.isUpdating = false;
