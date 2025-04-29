@@ -1,0 +1,45 @@
+<h2>Employee Management</h2>
+
+<!-- Add Employee Form -->
+<!-- <form (ngSubmit)="addEmployee()">
+  <input [(ngModel)]="employee.name" name="name" placeholder="Name" required>
+  <br><br>
+  <input [(ngModel)]="employee.email" name="email" placeholder="Email" required>
+  <br><br>
+  <select [(ngModel)]="employee.department" name="department" required>
+    <option value="HR">HR</option>
+    <option value="IT">IT</option>
+    <option value="FINANCE">Finance</option>
+    <option value="OPERATION">Operation</option>
+  </select>
+  <br><br>
+  <button type="submit">Add Employee</button>
+</form> -->
+
+<hr>
+
+<!-- Show Employee List -->
+<h3>Employee List</h3>
+
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>{{ emp.id }}</td>
+      <td>{{ emp.name }}</td>
+      <td>{{ emp.email }}</td>
+      <td>{{ emp.department }}</td>
+      <!-- <td>
+        <button (click)="deleteEmployee(emp.id)">Delete</button>
+      </td> -->
+    </tr>
+  </tbody>
+</table>
