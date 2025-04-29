@@ -38,14 +38,14 @@ export class EmployeeComponent implements OnInit {
   saveEmployee() {
     if (this.employee.name && this.employee.email && this.employee.department) {
       if (this.isUpdating) {
-        // Update existing employee
+    
         this.employeeService.updateEmployee(this.employee).subscribe(() => {
           alert('Employee updated successfully!');
           this.loadEmployees();
           this.resetForm();
         });
       } else {
-        // Add new employee
+
         this.employeeService.addEmployee(this.employee).subscribe(() => {
           alert('Employee added successfully!');
           this.loadEmployees();
@@ -57,13 +57,13 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // Edit employee 
+
   editEmployee(emp: Employee) {
     this.employee = { ...emp };
     this.isUpdating = true;
   }
 
-  // Delete employee
+ 
   deleteEmployee(id: number | undefined) {
     if (id !== undefined) {
       if (confirm('Are you sure you want to delete this employee?')) {
@@ -75,19 +75,18 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // Search employee by ID
   searchEmployeeById() {
     if (this.searchId > 0) {
       this.employeeService.getById(this.searchId).subscribe((emp) => {
-        this.employees = [emp]; // show only one employee
+        this.employees = [emp]; 
       }, (error) => {
         alert('Employee not found with ID: ' + this.searchId);
-        this.loadEmployees(); // reload all if not found
+        this.loadEmployees(); 
       });
     }
   }
 
-  // Search employees by Name
+  
   searchEmployeeByName() {
     if (this.searchName.trim() !== '') {
       this.employeeService.getByName(this.searchName).subscribe((data) => {
@@ -100,7 +99,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  // Reset form
+
   resetForm() {
     this.employee = { name: '', email: '', department: 'HR' };
     this.isUpdating = false;
