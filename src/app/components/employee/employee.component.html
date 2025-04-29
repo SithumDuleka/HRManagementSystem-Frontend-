@@ -1,7 +1,18 @@
 <h2>Employee Management</h2>
 
-<!-- Add Employee Form -->
-<!-- <form (ngSubmit)="addEmployee()">
+<!-- 🔍 Search Section -->
+<div style="margin-bottom: 20px;">
+  <input [(ngModel)]="searchId" name="searchId" placeholder="Search by ID" type="number">
+  <button (click)="searchEmployeeById()">Search by ID</button>
+
+  <input [(ngModel)]="searchName" name="searchName" placeholder="Search by Name" style="margin-left: 10px;">
+  <button (click)="searchEmployeeByName()">Search by Name</button>
+
+  <button (click)="loadEmployees()" style="margin-left: 10px;">Reset Search</button>
+</div>
+
+<!-- 🧾 Add/Update Employee Form -->
+<form (ngSubmit)="saveEmployee()">
   <input [(ngModel)]="employee.name" name="name" placeholder="Name" required>
   <br><br>
   <input [(ngModel)]="employee.email" name="email" placeholder="Email" required>
@@ -13,12 +24,15 @@
     <option value="OPERATION">Operation</option>
   </select>
   <br><br>
-  <button type="submit">Add Employee</button>
-</form> -->
+  <button type="submit">
+    {{ isUpdating ? 'Update Employee' : 'Add Employee' }}
+  </button>
+  <button type="button" (click)="resetForm()" style="margin-left: 10px;">Clear</button>
+</form>
 
 <hr>
 
-<!-- Show Employee List -->
+<!-- 📋 Employee List -->
 <h3>Employee List</h3>
 
 <table border="1" width="100%">
@@ -28,7 +42,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Department</th>
-      <th>Action</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -37,9 +51,10 @@
       <td>{{ emp.name }}</td>
       <td>{{ emp.email }}</td>
       <td>{{ emp.department }}</td>
-      <!-- <td>
-        <button (click)="deleteEmployee(emp.id)">Delete</button>
-      </td> -->
+      <td>
+        <button (click)="editEmployee(emp)">Edit</button>
+        <button (click)="deleteEmployee(emp.id)" style="margin-left: 5px;">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
